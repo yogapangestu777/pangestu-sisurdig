@@ -28,8 +28,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form action="{{ route('login.post') }}" class="form-validate is-alter" autocomplete="off"
-                                    method="post">
+                                <form action="{{ route('login.post') }}" class="form-validate is-alter was-validated"
+                                    autocomplete="off" method="post">
                                     @csrf
                                     <div class="form-group">
                                         <div class="form-label-group">
@@ -74,9 +74,9 @@
                                         <div> {!! htmlFormSnippet() !!} </div>
                                     </div>
                                     @error('g-recaptcha-response')
-                                        <div class="invalid-feedback d-flex justify-content-center">
+                                        <dibv class="invalid-feedback d-flex justify-content-center">
                                             {{ $message }}
-                                        </div>
+                                        </dibv>
                                     @enderror
                                     <div class="form-group">
                                         <button class="btn btn-lg btn-primary btn-block disable-button">Masuk</button>
@@ -92,4 +92,7 @@
         </div>
         <!-- main @e -->
     </div>
+@endsection
+@section('scripts')
+    <script src="{{ asset('assets/admin/js/interactions/disable-button.js?ver=1.0.0') }}"></script>
 @endsection
