@@ -1,80 +1,81 @@
 $(document).ready(function () {
-    let $myInput = $("#newpass");
-    let $retype = $("#retype");
+    let $newPassword = $("#new_password");
+    let $confirmNewPassword = $("#confirm_new_password");
     let $letter = $("#letter");
     let $capital = $("#capital");
     let $number = $("#number");
     let $symbol = $("#symbol");
     let $length = $("#length");
     let $feedback = $("#feedback");
-
-    $myInput.on("focus", function () {
-        $("#newpass-message").show();
+    let $confirmNewPasswordMessage = $("#confirm_new_password_message");
+  
+    $newPassword.on("focus", function () {
+      $("#new_password_message").show();
     });
-
-    $myInput.on("blur", function () {
-        $("#newpass-message").hide();
+  
+    $newPassword.on("blur", function () {
+      $("#new_password_message").hide();
     });
-
-    $myInput.on("keyup", function () {
-        let lowerCaseLetters = /[a-z]/g;
-        if ($myInput.val().match(lowerCaseLetters)) {
-            $letter.removeClass("invalid").addClass("valid");
-        } else {
-            $letter.removeClass("valid").addClass("invalid");
-        }
-
-        let upperCaseLetters = /[A-Z]/g;
-        if ($myInput.val().match(upperCaseLetters)) {
-            $capital.removeClass("invalid").addClass("valid");
-        } else {
-            $capital.removeClass("valid").addClass("invalid");
-        }
-
-        let numbers = /[0-9]/g;
-        if ($myInput.val().match(numbers)) {
-            $number.removeClass("invalid").addClass("valid");
-        } else {
-            $number.removeClass("valid").addClass("invalid");
-        }
-
-        if ($myInput.val().length >= 8) {
-            $length.removeClass("invalid").addClass("valid");
-        } else {
-            $length.removeClass("valid").addClass("invalid");
-        }
-
-        let symbols = /[!$#%@]/g;
-        if ($myInput.val().match(symbols)) {
-            $symbol.removeClass("invalid").addClass("valid");
-        } else {
-            $symbol.removeClass("valid").addClass("invalid");
-        }
+  
+    $newPassword.on("keyup", function () {
+      let value = $newPassword.val();
+  
+      if (/[a-z]/.test(value)) {
+        $letter.removeClass("invalid").addClass("valid");
+      } else {
+        $letter.removeClass("valid").addClass("invalid");
+      }
+  
+      if (/[A-Z]/.test(value)) {
+        $capital.removeClass("invalid").addClass("valid");
+      } else {
+        $capital.removeClass("valid").addClass("invalid");
+      }
+  
+      if (/[0-9]/.test(value)) {
+        $number.removeClass("invalid").addClass("valid");
+      } else {
+        $number.removeClass("valid").addClass("invalid");
+      }
+  
+      if (value.length >= 8) {
+        $length.removeClass("invalid").addClass("valid");
+      } else {
+        $length.removeClass("valid").addClass("invalid");
+      }
+  
+      if (/[!$#%@]/.test(value)) {
+        $symbol.removeClass("invalid").addClass("valid");
+      } else {
+        $symbol.removeClass("valid").addClass("invalid");
+      }
     });
-
-    $retype.on("focus", function () {
-        $feedback.show();
+    confirm_new_password
+    $confirmNewPassword.on("focus", function () {
+      $feedback.show();
     });
-
-    $retype.on("blur", function () {
-        $feedback.hide();
+  
+    $confirmNewPassword.on("blur", function () {
+      $feedback.hide();
     });
-
-    $retype.on("keyup", function () {
-        if ($retype.val().length === 0) {
-            $retype.removeClass("is-valid").addClass("is-invalid");
-            $feedback.addClass("text-danger");
-            $("#retype-message").html("Silakan masukkan ulang <b>Kata sandi baru!</b>");
-        } else {
-            if ($myInput.val() === $retype.val()) {
-                $retype.removeClass("is-invalid").addClass("is-valid");
-                $feedback.removeClass("text-danger").addClass("text-success");
-                $("#retype-message").html("Kata sandi <b>cocok!</b>");
-            } else {
-                $retype.removeClass("is-valid").addClass("is-invalid");
-                $feedback.removeClass("text-success").addClass("text-danger");
-                $("#retype-message").html("Kata sandi <b>tidak cocok!</b>");
-            }
-        }
+  
+    $confirmNewPassword.on("keyup", function () {
+      let repeatValue = $confirmNewPassword.val();
+      let newValue = $newPassword.val();
+  
+      if (repeatValue.length === 0) {
+        $confirmNewPassword.removeClass("is-valid").addClass("is-invalid");
+        $feedback.addClass("text-danger");
+        $confirmNewPasswordMessage.html("Silakan masukkan ulang <b>Kata sandi baru!</b>");
+      } else if (newValue === repeatValue) {
+        $confirmNewPassword.removeClass("is-invalid").addClass("is-valid");
+        $feedback.removeClass("text-danger").addClass("text-success");
+        $confirmNewPasswordMessage.html("Kata sandi <b>cocok!</b>");
+      } else {
+        $confirmNewPassword.removeClass("is-valid").addClass("is-invalid");
+        $feedback.removeClass("text-success").addClass("text-danger");
+        $confirmNewPasswordMessage.html("Kata sandi <b>tidak cocok!</b>");
+      }
     });
-});
+  });
+  

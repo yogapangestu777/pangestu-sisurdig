@@ -36,8 +36,8 @@
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li>
-                                        <a href="">
-                                            <em class="icon ni ni-user-alt"></em>
+                                        <a href="{{ route('admin.profile.account.index') }}">
+                                            <em class="icon ni ni-user-list"></em>
                                             <span>Akun</span>
                                         </a>
                                     </li>

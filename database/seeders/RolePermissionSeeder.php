@@ -16,7 +16,7 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = Role::create(['name' => 'Admin']);
+        $adminRole = Role::create(['name' => 'Admin']);
         Role::create(['name' => 'Kemahasiswaan']);
         Permission::create(['name' => 'read_overview']);
 
@@ -26,7 +26,7 @@ class RolePermissionSeeder extends Seeder
             'password' => Hash::make(env('DEFAULT_PASSWORD_USER')),
         ]);
 
-        $user->assignRole($user);
+        $user->assignRole($adminRole);
 
         Biography::create([
             'user_id' => $user->id,

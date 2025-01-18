@@ -4,4 +4,4 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-<title>{{ $pageTitle }} | Sisurdig</title>
+<title>{{ $pageTitle }} | SMI 1-3 Al-Muhajirin</title>

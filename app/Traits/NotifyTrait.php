@@ -9,7 +9,7 @@ trait NotifyTrait
 {
     public function handleValidationFailure(Validator $validator): void
     {
-        notify()->warning('Silakan periksa data yang Anda masukkan', 'Peringatan');
+        notify()->warning('Silakan periksa data yang Anda masukkan.', 'Peringatan');
         $response = redirect()
             ->back()
             ->withInput()
