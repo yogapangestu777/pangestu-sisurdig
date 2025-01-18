@@ -4,15 +4,12 @@
         <div class="nk-main ">
             <div class="nk-wrap nk-wrap-nosidebar">
                 <div class="nk-content"
-                    style="background-size: cover; height: 100vh; background-position: center center; background-repeat: no-repeat; background-image: url('/assets/images/auth.jpg'); background-attachment: fixed">
+                    style="background-size: cover; height: 100vh; background-position: center center; background-repeat: no-repeat; background-image: url('/assets/images/cover.jpg'); background-attachment: fixed">
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
                         <div class="brand-logo pb-4 text-center">
-                            <a href="html/index.html" class="logo-link">
-                                <img class="logo-light logo-img logo-img-lg" src="{{ asset('assets/images/logo/logo.png') }}"
-                                    srcset="{{ asset('assets/images/logo/logo2x.png 2x') }}" alt="logo">
-                                <img class="logo-dark logo-img logo-img-lg"
-                                    src="{{ asset('assets/images/logo/logo-dark.png') }}"
-                                    srcset="{{ asset('assets/images/logo/logo-dark2x.png 2x') }}" alt="logo-dark">
+                            <a href="{{ url()->current() }}" class="logo-link">
+                                <img class="logo-dark logo-img logo-img-lg" src="{{ asset('assets/images/logo.png') }}"
+                                    alt="logo">
                             </a>
                         </div>
                         <div class="card card-bordered">
@@ -28,8 +25,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <form action="{{ route('login.post') }}" class="form-validate is-alter was-validated"
-                                    autocomplete="off" method="post">
+                                <form action="{{ route('login.post') }}" class="form-validate is-alter " autocomplete="off"
+                                    method="post">
                                     @csrf
                                     <div class="form-group">
                                         <div class="form-label-group">
