@@ -1,0 +1,1 @@
+let DT_COLUMNS = []
