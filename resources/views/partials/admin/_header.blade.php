@@ -14,9 +14,6 @@
                     <li class="dropdown user-dropdown">
                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                             <div class="user-toggle">
-                                <div class="user-avatar sm">
-                                    <img src="" alt="image">
-                                </div>
                                 <div class="user-info d-none d-md-block">
                                     <div class="user-status">{{ auth()->user()->roles->first()->name }}</div>
                                     <div class="user-name dropdown-indicator">
