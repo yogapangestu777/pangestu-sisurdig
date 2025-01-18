@@ -18,7 +18,7 @@ class AuthService
             if ($user->is_active === '1') {
                 return [
                     'status' => true,
-                    'message' => 'Selamat datang '.$user->biography->full_name,
+                    'message' => 'Selamat datang '.$user->biography->full_name.'.',
                     'notifyType' => 'success',
                     'notifyTitle' => 'Berhasil',
                 ];
@@ -36,9 +36,14 @@ class AuthService
 
         return [
             'status' => false,
-            'message' => 'Email, nama pengguna atau kata sandi salah',
+            'message' => 'Email, nama pengguna atau kata sandi salah.',
             'notifyType' => 'warning',
             'notifyTitle' => 'Peringatan',
         ];
+    }
+
+    public function logout(): void
+    {
+        Auth::logout();
     }
 }

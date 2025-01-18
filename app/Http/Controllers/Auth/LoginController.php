@@ -33,4 +33,12 @@ class LoginController extends Controller
 
         return redirect()->route('login');
     }
+
+    public function logout(): RedirectResponse
+    {
+        $this->authService->logout();
+        notify()->success('Anda telah keluar dari akun.', 'Berhasil');
+
+        return redirect()->route('login');
+    }
 }
