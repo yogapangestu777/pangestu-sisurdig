@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Manage\IncomingLetterController;
 use App\Http\Controllers\Admin\Manage\UserController;
 use App\Http\Controllers\Admin\Master\CategoryController;
 use App\Http\Controllers\Admin\Master\PartyController;
@@ -81,6 +82,17 @@ Route::group([
             ]);
         Route::put('users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('admin.manage.users.resetPassword');
         Route::put('users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('admin.manage.users.toggleStatus');
+
+        Route::resource('incoming-letters', IncomingLetterController::class)
+            ->except(['show'])
+            ->names([
+                'index' => 'admin.manage.incomingLetters.index',
+                'create' => 'admin.manage.incomingLetters.create',
+                'store' => 'admin.manage.incomingLetters.store',
+                'edit' => 'admin.manage.incomingLetters.edit',
+                'update' => 'admin.manage.incomingLetters.update',
+                'destroy' => 'admin.manage.incomingLetters.destroy',
+            ]);
     });
 
     Route::prefix('setting')->group(function () {
