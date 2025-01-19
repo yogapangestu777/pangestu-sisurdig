@@ -26,11 +26,11 @@ class UserService
             'username' => $user->username,
 
             // biography model
-            'full_name' => $user->biography->full_name,
-            'phone_number' => $user->biography->phone_number,
-            'pob' => $user->biography->pob,
-            'dob' => $user->biography->dob,
-            'gender' => $user->biography->gender,
+            'full_name' => $user->biography->full_name ?? '-unknown-',
+            'phone_number' => $user->biography->phone_number ?? '-unknown-',
+            'pob' => $user->biography->pob ?? '-unknown-',
+            'dob' => $user->biography->dob  ?? '-unknown-',
+            'gender' => $user->biography->gender ?? '-unknown-',
 
             // role model
             'role' => encryptId($user->roles->first()->id),
@@ -70,11 +70,11 @@ class UserService
                 'created_at' => formatDateTime($user->created_at),
 
                 // biography model
-                'full_name' => $user->biography->full_name ?? '-deleted-',
-                'phone_number' => $user->biography->phone_number ?? '-deleted-',
-                'pob' => $user->biography->pob ?? '-deleted-',
-                'dob' => formatDate($user->biography->dob) ?? '-deleted-',
-                'gender' => ($user->biography->gender === '1' ? 'Laki-laki' : 'Perempuan') ?? '-deleted-',
+                'full_name' => $user->biography->full_name ?? '-unknown-',
+                'phone_number' => $user->biography->phone_number ?? '-unknown-',
+                'pob' => $user->biography->pob ?? '-unknown-',
+                'dob' => formatDate($user->biography->dob) ?? '-unknown-',
+                'gender' => ($user->biography->gender === '1' ? 'Laki-laki' : 'Perempuan') ?? '-unknown-',
 
                 // role model
                 'role' => $user->roles->first()->name,
