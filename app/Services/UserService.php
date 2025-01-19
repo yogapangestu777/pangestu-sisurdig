@@ -29,7 +29,7 @@ class UserService
             'full_name' => $user->biography->full_name ?? '-unknown-',
             'phone_number' => $user->biography->phone_number ?? '-unknown-',
             'pob' => $user->biography->pob ?? '-unknown-',
-            'dob' => $user->biography->dob  ?? '-unknown-',
+            'dob' => $user->biography->dob ?? '-unknown-',
             'gender' => $user->biography->gender ?? '-unknown-',
 
             // role model

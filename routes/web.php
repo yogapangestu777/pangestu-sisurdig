@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Manage\UserController;
 use App\Http\Controllers\Admin\Master\CategoryController;
+use App\Http\Controllers\Admin\Master\PartyController;
 use App\Http\Controllers\Admin\OverviewController;
 use App\Http\Controllers\Admin\Profile\AccountController;
 use App\Http\Controllers\Admin\Profile\BiographyController;
@@ -55,6 +56,15 @@ Route::group([
                 'store' => 'admin.master.categories.store',
                 'update' => 'admin.master.categories.update',
                 'destroy' => 'admin.master.categories.destroy',
+            ]);
+
+        Route::resource('parties', PartyController::class)
+            ->only(['index', 'store', 'update', 'destroy'])
+            ->names([
+                'index' => 'admin.master.parties.index',
+                'store' => 'admin.master.parties.store',
+                'update' => 'admin.master.parties.update',
+                'destroy' => 'admin.master.parties.destroy',
             ]);
     });
 

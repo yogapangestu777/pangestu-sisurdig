@@ -36,6 +36,12 @@
                                 <span class="nk-menu-text">Kategori</span>
                             </a>
                         </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="{{ route('admin.master.parties.index') }}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
+                                <span class="nk-menu-text">Pihak Terkait</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
                         <li class="nk-menu-heading">
                             <h6 class="overline-title text-primary-alt">Kelola</h6>
                         </li><!-- .nk-menu-item -->
