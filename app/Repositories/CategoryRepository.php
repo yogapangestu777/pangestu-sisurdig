@@ -5,13 +5,11 @@ namespace App\Repositories;
 use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Spatie\Permission\Models\Permission;
 
 class CategoryRepository implements CategoryRepositoryInterface
 {
     public function __construct(
-        protected Category $categoryModel,
-        protected Permission $permissionModel
+        protected Category $categoryModel
     ) {}
 
     public function getAll(): Collection
