@@ -7,6 +7,7 @@ $(document).ready(function () {
             method: button.data("method"),
 
             name: button.data("name"),
+            permissions: button.data("permissions"),
         }
 
         $(".modal-title").text(data.title)
@@ -15,13 +16,18 @@ $(document).ready(function () {
 
         if (data.method === "put") {
             $("#name").val(data.name)
+            $("input[name='permissions[]']").each(function () {
+                const value = $(this).val()
+                $(this).prop("checked", data.permissions.includes(value))
+            })
         }
     })
 
     $("#create-modal").on("hidden.bs.modal", function () {
         const method = $("#form-method").val()
         if (method === "put") {
-            $("#name").val("")
+            $("#form")[0].reset();
         }
     })
 })
+

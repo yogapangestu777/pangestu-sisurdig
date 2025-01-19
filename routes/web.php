@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\OverviewController;
 use App\Http\Controllers\Admin\Profile\AccountController;
 use App\Http\Controllers\Admin\Profile\BiographyController;
 use App\Http\Controllers\Admin\Profile\PasswordController;
-use App\Http\Controllers\Admin\Setting\RoleController;
+use App\Http\Controllers\Admin\Setting\RolePermissionController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,13 +46,13 @@ Route::group([
     });
 
     Route::prefix('setting')->group(function () {
-        Route::resource('roles', RoleController::class)
+        Route::resource('role-permissions', RolePermissionController::class)
             ->only(['index', 'store', 'update', 'destroy'])
             ->names([
-                'index' => 'admin.setting.roles.index',
-                'store' => 'admin.setting.roles.store',
-                'update' => 'admin.setting.roles.update',
-                'destroy' => 'admin.setting.roles.destroy',
+                'index' => 'admin.setting.rolePermissions.index',
+                'store' => 'admin.setting.rolePermissions.store',
+                'update' => 'admin.setting.rolePermissions.update',
+                'destroy' => 'admin.setting.rolePermissions.destroy',
             ]);
     });
 });

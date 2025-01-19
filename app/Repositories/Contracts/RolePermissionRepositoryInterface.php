@@ -5,9 +5,11 @@ namespace App\Repositories\Contracts;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\Permission\Models\Role;
 
-interface RoleRepositoryInterface
+interface RolePermissionRepositoryInterface
 {
-    public function all(): Collection;
+    public function getRoleWithPermissions(): Collection;
+
+    public function getPermissions(): Collection;
 
     public function create(array $data): void;
 

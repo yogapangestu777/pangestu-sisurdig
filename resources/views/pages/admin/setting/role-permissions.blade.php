@@ -15,7 +15,8 @@
                                         <li>
                                             <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#create-modal" data-title="Tambah"
-                                                data-url="{{ route('admin.setting.roles.store') }}" data-method="post">
+                                                data-url="{{ route('admin.setting.rolePermissions.store') }}"
+                                                data-method="post">
                                                 <span>Tambah</span>
                                             </a>
                                         </li>
@@ -33,6 +34,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
+                                        <th>Hak Akses</th>
                                         <th>Tanggal</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -42,6 +44,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $role->name }}</td>
+                                            <td>{{ $role->permissions }}</td>
                                             <td>{{ $role->created_at }}</td>
                                             <td class="nk-tb-col nk-tb-col-tools">
                                                 <ul class="gx-1">
@@ -57,16 +60,17 @@
                                                                     <li>
                                                                         <a href="javascript:void(0)" data-bs-toggle="modal"
                                                                             data-bs-target="#create-modal" data-title="Edit"
-                                                                            data-url="{{ route('admin.setting.roles.update', $role->id) }}"
+                                                                            data-url="{{ route('admin.setting.rolePermissions.update', $role->id) }}"
                                                                             data-method="put"
-                                                                            data-name="{{ $role->name }}">
+                                                                            data-name="{{ $role->name }}"
+                                                                            data-permissions="{{ $role->permissionIds }}">
                                                                             <em class="icon ni ni-edit"></em>
                                                                             <span>Edit</span>
                                                                         </a>
                                                                     </li>
                                                                     <li>
                                                                         <form
-                                                                            action="{{ route('admin.setting.roles.destroy', $role->id) }}"
+                                                                            action="{{ route('admin.setting.rolePermissions.destroy', $role->id) }}"
                                                                             method="post">
                                                                             @csrf
                                                                             @method('delete')
@@ -107,7 +111,7 @@
                     @csrf
                     <input type="hidden" name="_method" id="form-method">
                     <div class="modal-body">
-                        <div class="row">
+                        <div class="row g-3">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-label" for="name">Nama</label>
@@ -116,6 +120,35 @@
                                             class="form-control @error('name') is-invalid @enderror" id="name"
                                             placeholder="Masukan nama" value="{{ old('name') }}">
                                         @error('name')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-label" for="permissions">Hak Akses</label>
+                                    <div class="form-control-wrap">
+                                        <div class="form-control-wrap">
+                                            <ul class="custom-control-group">
+                                                @foreach ($permissions as $permission)
+                                                    <li>
+                                                        <div
+                                                            class="custom-control custom-checkbox custom-control-pro no-control">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                name="permissions[]" value="{{ $permission->id }}"
+                                                                id="permission{{ $permission->id }}"
+                                                                @checked(old('permissions') && in_array($permission->id, old('permissions')))>
+                                                            <label class="custom-control-label"
+                                                                for="permission{{ $permission->id }}">{{ $permission->name }}</label>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @error('permissions')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -138,5 +171,5 @@
     <script src="{{ asset('assets/admin/js/table/client-side.js?ver=1.0.0') }}"></script>
     <script src="{{ asset('assets/admin/js/interactions/confirmation.js?ver=1.0.0') }}"></script>
     <script src="{{ asset('assets/admin/js/interactions/disable-button.js?ver=1.0.0') }}"></script>
-    <script src="{{ asset('assets/admin/js/modals/role.js?ver=1.0.0') }}"></script>
+    <script src="{{ asset('assets/admin/js/modals/role-permission.js?ver=1.0.0') }}"></script>
 @endsection

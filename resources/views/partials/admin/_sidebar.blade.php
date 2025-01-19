@@ -28,14 +28,15 @@
                             </a>
                         </li><!-- .nk-menu-item -->
                         <li class="nk-menu-heading">
-                            <h6 class="overline-title text-primary-alt">Pengatuarn</h6>
+                            <h6 class="overline-title text-primary-alt">Pengaturan</h6>
                         </li><!-- .nk-menu-item -->
                         <li class="nk-menu-item">
-                            <a href="{{ route('admin.setting.roles.index') }}" class="nk-menu-link">
+                            <a href="{{ route('admin.setting.rolePermissions.index') }}" class="nk-menu-link">
                                 <span class="nk-menu-icon"><em class="icon ni ni-opt-dot-alt"></em></span>
-                                <span class="nk-menu-text">Role</span>
+                                <span class="nk-menu-text">Role & Hak Akses</span>
                             </a>
                         </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
                     </ul><!-- .nk-footer-menu -->
                 </div><!-- .nk-sidebar-footer -->
             </div><!-- .nk-sidebar-content -->
