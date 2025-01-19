@@ -6,6 +6,7 @@ use App\Models\Party;
 use App\Repositories\Contracts\PartyRepositoryInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Yajra\DataTables\Facades\DataTables;
 
 class PartyService
@@ -17,6 +18,16 @@ class PartyService
     public function getPartiesQuery(): Builder
     {
         return $this->partyRepo->partiesQuery();
+    }
+
+    public function getParties(): Collection
+    {
+        return $this->partyRepo->all()->map(function ($party) {
+            return (object) [
+                'id' => encryptId($party->id),
+                'name' => $party->name,
+            ];
+        });
     }
 
     public function createParty(array $data): void
