@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         return view('pages.admin.manage.users.index', [
             'pageTitle' => 'Pengguna',
-            'pageDescription' => 'Daftar pengguna yang terdaftar di aplikasi',
+            'pageDescription' => 'Daftar pengguna yang terdaftar di aplikasi.',
             'users' => $this->userService->getUsers(),
         ]);
     }
