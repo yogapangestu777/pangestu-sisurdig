@@ -42,17 +42,6 @@ class PartyService
         $this->partyRepo->delete($party);
     }
 
-    public function renderTypeColumn(Party $party): string
-    {
-        $type = match ($party->type) {
-            '1' => 'Individu',
-            '2' => 'Organisasi/Agensi',
-            default => '-unknown-',
-        };
-
-        return $type;
-    }
-
     public function renderPartyDataTable(Builder $parties): JsonResponse
     {
         return DataTables::eloquent($parties)
@@ -63,6 +52,17 @@ class PartyService
             ->addColumn('actions', fn ($party) => $this->renderActionsColumn($party))
             ->rawColumns(['actions', 'type'])
             ->make();
+    }
+
+    private function renderTypeColumn(Party $party): string
+    {
+        $type = match ($party->type) {
+            '1' => 'Individu',
+            '2' => 'Organisasi/Agensi',
+            default => '-unknown-',
+        };
+
+        return $type;
     }
 
     private function renderActionsColumn(Party $party): string
