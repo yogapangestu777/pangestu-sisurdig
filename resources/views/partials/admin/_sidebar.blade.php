@@ -28,6 +28,15 @@
                             </a>
                         </li><!-- .nk-menu-item -->
                         <li class="nk-menu-heading">
+                            <h6 class="overline-title text-primary-alt">Master</h6>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="{{ route('admin.master.categories.index') }}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-list"></em></span>
+                                <span class="nk-menu-text">Kategori</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-heading">
                             <h6 class="overline-title text-primary-alt">Kelola</h6>
                         </li><!-- .nk-menu-item -->
                         <li class="nk-menu-item">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Manage\UserController;
+use App\Http\Controllers\Admin\Master\CategoryController;
 use App\Http\Controllers\Admin\OverviewController;
 use App\Http\Controllers\Admin\Profile\AccountController;
 use App\Http\Controllers\Admin\Profile\BiographyController;
@@ -43,6 +44,17 @@ Route::group([
             ->names([
                 'index' => 'admin.profile.password.index',
                 'update' => 'admin.profile.password.update',
+            ]);
+    });
+
+    Route::prefix('master')->group(function () {
+        Route::resource('categories', CategoryController::class)
+            ->only(['index', 'store', 'update', 'destroy'])
+            ->names([
+                'index' => 'admin.master.categories.index',
+                'store' => 'admin.master.categories.store',
+                'update' => 'admin.master.categories.update',
+                'destroy' => 'admin.master.categories.destroy',
             ]);
     });
 
