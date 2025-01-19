@@ -18,12 +18,12 @@ class UserRequest extends FormRequest
 
     public function prepareForValidation(): void
     {
-        if ($this->has('role')) {
+        if ($this->filled('role')) {
             $this->merge([
                 'role' => decryptId($this->role),
             ]);
         }
-        if ($this->user) {
+        if (! is_null($this->user)) {
             $this->merge([
                 'user' => decryptId($this->user),
             ]);

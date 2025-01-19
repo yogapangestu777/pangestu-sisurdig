@@ -16,21 +16,28 @@ class AccountRequest extends FormRequest
         return auth()->check();
     }
 
+    public function prepareForValidation(): void
+    {
+        if (! is_null($this->user)) {
+            $this->merge([
+                'user' => decryptId($this->user),
+            ]);
+        }
+    }
+
     public function rules(): array
     {
-        $userId = decryptId($this->route('account'));
-
         return [
             'email' => [
                 'required',
                 'email',
-                Rule::unique('users', 'email')->ignore($userId),
+                Rule::unique('users', 'email')->ignore($this->user),
                 'max:50',
             ],
             'username' => [
                 'required',
                 'string',
-                Rule::unique('users', 'username')->ignore($userId),
+                Rule::unique('users', 'username')->ignore($this->user),
                 'min:5',
                 'max:20',
             ],
