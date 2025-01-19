@@ -65,7 +65,7 @@
                                                                 class="form-control @error('phone_number') is-invalid @enderror"
                                                                 id="phone_number" placeholder="Masukan no telepon"
                                                                 value="{{ old('phone_number', $biography->phone_number) }}"
-                                                                inputmode="number">
+                                                                inputmode="numeric">
                                                             @error('phone_number')
                                                                 <div class="invalid-feedback">
                                                                     {{ $message }}
@@ -99,8 +99,8 @@
                                                             </div>
                                                             <input type="text" name="dob"
                                                                 class="form-control date-picker @error('dob') is-invalid @enderror"
-                                                                data-date-format="yyyy-mm-dd"
-                                                                value="{{ $biography->dob }}">
+                                                                data-date-format="yyyy-mm-dd" value="{{ $biography->dob }}"
+                                                                placeholder="Masukan tanggal lahir">
                                                             @error('dob')
                                                                 <div class="invalid-feedback">
                                                                     {{ $message }}

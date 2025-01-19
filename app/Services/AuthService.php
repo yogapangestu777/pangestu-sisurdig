@@ -27,7 +27,7 @@ class AuthService
 
                 return [
                     'status' => false,
-                    'message' => 'Akun Anda saat ini tidak aktif. Silakan hubungi administrator untuk informasi lebih lanjut.',
+                    'message' => 'Akun Anda saat ini Non-aktif. Silakan hubungi administrator untuk informasi lebih lanjut.',
                     'notifyType' => 'info',
                     'notifyTitle' => 'Pemberitahuan',
                 ];

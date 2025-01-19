@@ -9,6 +9,8 @@ interface RolePermissionRepositoryInterface
 {
     public function getRoleWithPermissions(): Collection;
 
+    public function getRoles(): Collection;
+
     public function getPermissions(): Collection;
 
     public function create(array $data): void;

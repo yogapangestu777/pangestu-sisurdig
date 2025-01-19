@@ -24,6 +24,16 @@ class RolePermissionService
         });
     }
 
+    public function getRoles(): Collection
+    {
+        return $this->rolePermissionRepo->getRoles()->map(function ($role) {
+            return (object) [
+                'id' => encryptId($role->id),
+                'name' => $role->name,
+            ];
+        });
+    }
+
     public function getPermissions(): Collection
     {
         return $this->rolePermissionRepo->getPermissions()->map(function ($permission) {
@@ -32,6 +42,20 @@ class RolePermissionService
                 'name' => $permission->name,
             ];
         });
+    }
+
+    public function findRoleById(string $id): object
+    {
+        $decrytedId = is_numeric($id) ? $id : decryptId($id);
+        $role = $this->rolePermissionRepo->findById($decrytedId);
+
+        return (object) [
+            'id' => encryptId($role->id),
+            'name' => $role->name,
+            'permissions' => $role->permissions->implode('name', ', '),
+            'permissionIds' => $role->permissions->map(fn ($permission) => encryptId($permission->id)),
+            'created_at' => formatDateTime($role->created_at),
+        ];
     }
 
     public function createRole(array $data): void

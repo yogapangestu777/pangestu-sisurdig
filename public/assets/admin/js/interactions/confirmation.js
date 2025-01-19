@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     $(document).on('click', '.reset-password', function (e) {
         e.preventDefault()
-        const url = $(this).attr('href')
+        const form = $(this).closest('form')
 
         Swal.fire({
             title: 'Permohonan Reset Kata Sandi',
@@ -29,7 +29,27 @@ $(document).ready(function () {
             cancelButtonText: 'Batal'
         }).then(function (result) {
             if (result.isConfirmed) {
-                window.location.href = url
+                form.submit()
+            }
+        })
+    })
+
+    $(document).on('click', '.toggle-status', function (e) {
+        e.preventDefault()
+        const form = $(this).closest('form')
+        const currentStatus = form.find('input[name="status"]').val()
+        const newStatus = currentStatus === '1' ? 'Non-aktifkan' : 'Aktifkan';
+
+        Swal.fire({
+            title: `Anda ingin me ${newStatus}?`,
+            text: `Apakah Anda yakin ingin me ${newStatus} pengguna ini?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: `Ya, ${newStatus}`,
+            cancelButtonText: 'Batal'
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                form.submit()
             }
         })
     })

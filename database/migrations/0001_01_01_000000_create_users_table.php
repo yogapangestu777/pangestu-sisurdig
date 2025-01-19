@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username', 20);
-            $table->unique(['username', 'deleted_at'], 'unique_username_active_users');
             $table->string('email', 50);
-            $table->unique(['email', 'deleted_at'], 'unique_email_active_users');
             $table->string('password');
             $table->enum('is_active', ['0', '1'])->default('1')->comment('0 = Inactive, 1 = Active');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique('username', 'unique_username_active_users')->where('deleted_at IS NULL');
+            $table->unique('email', 'unique_email_active_users')->where('deleted_at IS NULL');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

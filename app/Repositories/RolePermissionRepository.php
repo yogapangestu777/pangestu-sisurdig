@@ -19,6 +19,11 @@ class RolePermissionRepository implements RolePermissionRepositoryInterface
         return $this->roleModel->latest()->get();
     }
 
+    public function getRoles(): Collection
+    {
+        return $this->roleModel->latest()->get();
+    }
+
     public function getPermissions(): Collection
     {
         return $this->permissionModel->latest()->get();

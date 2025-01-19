@@ -97,7 +97,7 @@
                                                             <input type="text" name="status"
                                                                 class="form-control @error('status') is-invalid @enderror"
                                                                 id="status" placeholder="Masukan status"
-                                                                value="{{ old('status', $account->is_active === '1' ? 'Aktif' : 'Tidak Aktif') }}"
+                                                                value="{{ old('status', $account->is_active === '1' ? 'Aktif' : 'Non-aktif') }}"
                                                                 disabled>
                                                             @error('status')
                                                                 <div class="invalid-feedback">

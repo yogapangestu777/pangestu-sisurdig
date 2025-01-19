@@ -3159,7 +3159,7 @@ div.dataTables_wrapper div.dataTables_filter .input-group input.is-valid:focus,
 }
 
 .invalid-feedback {
-    display: none;
+    display: block;
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875em;
@@ -3178,13 +3178,6 @@ div.dataTables_wrapper div.dataTables_filter .input-group input.is-valid:focus,
     color: #fff;
     background-color: rgba(232, 83, 71, 0.9);
     border-radius: 3px;
-}
-
-.was-validated :invalid~.invalid-feedback,
-.was-validated :invalid~.invalid-tooltip,
-.is-invalid~.invalid-feedback,
-.is-invalid~.invalid-tooltip {
-    display: block;
 }
 
 .was-validated .form-control:invalid,

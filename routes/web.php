@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Manage\UserController;
 use App\Http\Controllers\Admin\OverviewController;
 use App\Http\Controllers\Admin\Profile\AccountController;
 use App\Http\Controllers\Admin\Profile\BiographyController;
@@ -43,6 +44,21 @@ Route::group([
                 'index' => 'admin.profile.password.index',
                 'update' => 'admin.profile.password.update',
             ]);
+    });
+
+    Route::prefix('manage')->group(function () {
+        Route::resource('users', UserController::class)
+            ->except(['show'])
+            ->names([
+                'index' => 'admin.manage.users.index',
+                'create' => 'admin.manage.users.create',
+                'store' => 'admin.manage.users.store',
+                'edit' => 'admin.manage.users.edit',
+                'update' => 'admin.manage.users.update',
+                'destroy' => 'admin.manage.users.destroy',
+            ]);
+        Route::put('users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('admin.manage.users.resetPassword');
+        Route::put('users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('admin.manage.users.toggleStatus');
     });
 
     Route::prefix('setting')->group(function () {
