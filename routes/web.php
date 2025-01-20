@@ -22,6 +22,8 @@ Route::prefix('auth')->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 });
 
+Route::get('/', [OverviewController::class, 'index'])->name('admin.overview')->middleware('auth');
+
 Route::group([
     'prefix' => 'dashboard',
     'middleware' => 'auth',
