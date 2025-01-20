@@ -57,6 +57,12 @@
                                 <span class="nk-menu-text">Surat Masuk</span>
                             </a>
                         </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="{{ route('admin.manage.outgoingLetters.index') }}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-inbox-out"></em></span>
+                                <span class="nk-menu-text">Surat Keluar</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
                         <li class="nk-menu-heading">
                             <h6 class="overline-title text-primary-alt">Pengaturan</h6>
                         </li><!-- .nk-menu-item -->

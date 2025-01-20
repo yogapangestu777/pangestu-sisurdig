@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AttachmentController;
 use App\Http\Controllers\Admin\Manage\IncomingLetterController;
+use App\Http\Controllers\Admin\Manage\OutgoingLetterController;
 use App\Http\Controllers\Admin\Manage\UserController;
 use App\Http\Controllers\Admin\Master\CategoryController;
 use App\Http\Controllers\Admin\Master\PartyController;
@@ -97,6 +98,18 @@ Route::group([
                 'destroy' => 'admin.manage.incomingLetters.destroy',
             ]);
         Route::get('incoming-letters/{incomingLetter}/download', [IncomingLetterController::class, 'download'])->name('admin.manage.incomingLetters.download');
+
+        Route::resource('outgoing-letters', OutgoingLetterController::class)
+            ->names([
+                'index' => 'admin.manage.outgoingLetters.index',
+                'create' => 'admin.manage.outgoingLetters.create',
+                'store' => 'admin.manage.outgoingLetters.store',
+                'show' => 'admin.manage.outgoingLetters.show',
+                'edit' => 'admin.manage.outgoingLetters.edit',
+                'update' => 'admin.manage.outgoingLetters.update',
+                'destroy' => 'admin.manage.outgoingLetters.destroy',
+            ]);
+        Route::get('outgoing-letters/{outgoingLetter}/download', [OutgoingLetterController::class, 'download'])->name('admin.manage.outgoingLetters.download');
     });
 
     Route::prefix('setting')->group(function () {
