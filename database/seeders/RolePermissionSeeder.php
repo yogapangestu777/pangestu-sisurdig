@@ -16,9 +16,67 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
+        // Create Admin Role
         $adminRole = Role::create(['name' => 'Admin']);
-        $permission = Permission::create(['name' => 'read_overview']);
+        $permissions = [];
 
+        // Overview Permissions
+        $permissions[] = Permission::create(['name' => 'overview.read']);
+        $permissions[] = Permission::create(['name' => 'overview.filter']);
+
+        // Category Permissions
+        $permissions[] = Permission::create(['name' => 'categories.read']);
+        $permissions[] = Permission::create(['name' => 'categories.create']);
+        $permissions[] = Permission::create(['name' => 'categories.update']);
+        $permissions[] = Permission::create(['name' => 'categories.delete']);
+
+        // Party Permissions
+        $permissions[] = Permission::create(['name' => 'parties.read']);
+        $permissions[] = Permission::create(['name' => 'parties.create']);
+        $permissions[] = Permission::create(['name' => 'parties.update']);
+        $permissions[] = Permission::create(['name' => 'parties.delete']);
+
+        // User Permissions
+        $permissions[] = Permission::create(['name' => 'users.read']);
+        $permissions[] = Permission::create(['name' => 'users.create']);
+        $permissions[] = Permission::create(['name' => 'users.update']);
+        $permissions[] = Permission::create(['name' => 'users.delete']);
+        $permissions[] = Permission::create(['name' => 'users.activate']);
+        $permissions[] = Permission::create(['name' => 'users.deactivate']);
+        $permissions[] = Permission::create(['name' => 'users.reset_password']);
+
+        // Incoming Letter Permissions
+        $permissions[] = Permission::create(['name' => 'incoming_letters.read']);
+        $permissions[] = Permission::create(['name' => 'incoming_letters.create']);
+        $permissions[] = Permission::create(['name' => 'incoming_letters.update']);
+        $permissions[] = Permission::create(['name' => 'incoming_letters.delete']);
+        $permissions[] = Permission::create(['name' => 'incoming_letters.view']);
+        $permissions[] = Permission::create(['name' => 'incoming_letters.download']);
+
+        // Outgoing Letter Permissions
+        $permissions[] = Permission::create(['name' => 'outgoing_letters.read']);
+        $permissions[] = Permission::create(['name' => 'outgoing_letters.create']);
+        $permissions[] = Permission::create(['name' => 'outgoing_letters.update']);
+        $permissions[] = Permission::create(['name' => 'outgoing_letters.delete']);
+        $permissions[] = Permission::create(['name' => 'outgoing_letters.view']);
+        $permissions[] = Permission::create(['name' => 'outgoing_letters.download']);
+
+        // Account Permissions
+        $permissions[] = Permission::create(['name' => 'account.read']);
+        $permissions[] = Permission::create(['name' => 'account.update']);
+
+        // Biography Permissions
+        $permissions[] = Permission::create(['name' => 'biography.read']);
+        $permissions[] = Permission::create(['name' => 'biography.update']);
+
+        // Password Permissions
+        $permissions[] = Permission::create(['name' => 'password.read']);
+        $permissions[] = Permission::create(['name' => 'password.update']);
+
+        // Assign all permissions to Admin role
+        $adminRole->givePermissionTo($permissions);
+
+        // Create Default Admin User
         $user = User::create([
             'username' => 'yoga',
             'email' => 'yoga@developer.com',
@@ -26,7 +84,6 @@ class RolePermissionSeeder extends Seeder
         ]);
 
         $user->assignRole($adminRole);
-        $adminRole->givePermissionTo($permission);
 
         Biography::create([
             'user_id' => $user->id,
