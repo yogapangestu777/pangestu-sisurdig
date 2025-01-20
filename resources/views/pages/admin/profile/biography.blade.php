@@ -14,24 +14,28 @@
                         <div class="card-aside-wrap">
                             <div class="card-content">
                                 <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('admin.profile.account.index') }}">
-                                            <em class="icon ni ni-account-setting-alt"></em>
-                                            <span>Akun</span>
-                                        </a>
-                                    </li>
+                                    @can('account.read')
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.profile.account.index') }}">
+                                                <em class="icon ni ni-account-setting-alt"></em>
+                                                <span>Akun</span>
+                                            </a>
+                                        </li>
+                                    @endcan
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('admin.profile.biography.index') }}">
                                             <em class="icon ni ni-user-check"></em>
                                             <span>Biodata</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('admin.profile.password.index') }}">
-                                            <em class="icon ni ni-lock-alt"></em>
-                                            <span>Kata Sandi</span>
-                                        </a>
-                                    </li>
+                                    @can('password.read')
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.profile.password.index') }}">
+                                                <em class="icon ni ni-lock-alt"></em>
+                                                <span>Kata Sandi</span>
+                                            </a>
+                                        </li>
+                                    @endcan
                                 </ul>
                                 <div class="card-inner">
                                     <div class="nk-block">
@@ -143,10 +147,12 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <button type="submit"
-                                                        class="btn btn-primary disable-button">Simpan</button>
-                                                </div>
+                                                @can('biography.update')
+                                                    <div class="form-group">
+                                                        <button type="submit"
+                                                            class="btn btn-primary disable-button">Simpan</button>
+                                                    </div>
+                                                @endcan
                                             </div>
                                         </form>
                                     </div>

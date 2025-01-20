@@ -33,6 +33,7 @@ class IncomingLetterController extends Controller
         return view('pages.admin.manage.incomingLetters.index', [
             'pageTitle' => 'Surat Masuk',
             'pageDescription' => 'Daftar surat masuk yang tersedia di aplikasi.',
+            'isVisible' => auth()->user()->canAny(['incomingLetters.update', 'incomingLetters.delete', 'incomingLetters.show', 'incomingLetters.download']),
         ]);
     }
 

@@ -20,18 +20,22 @@
                                             <span>Akun</span>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('admin.profile.biography.index') }}">
-                                            <em class="icon ni ni-user-check"></em>
-                                            <span>Biodata</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('admin.profile.password.index') }}">
-                                            <em class="icon ni ni-lock-alt"></em>
-                                            <span>Kata Sandi</span>
-                                        </a>
-                                    </li>
+                                    @can('biography.read')
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.profile.biography.index') }}">
+                                                <em class="icon ni ni-user-check"></em>
+                                                <span>Biodata</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('password.read')
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.profile.password.index') }}">
+                                                <em class="icon ni ni-lock-alt"></em>
+                                                <span>Kata Sandi</span>
+                                            </a>
+                                        </li>
+                                    @endcan
                                 </ul>
                                 <div class="card-inner">
                                     <div class="nk-block">
@@ -107,10 +111,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <button type="submit"
-                                                        class="btn btn-primary disable-button">Simpan</button>
-                                                </div>
+                                                @can('account.update')
+                                                    <div class="form-group">
+                                                        <button type="submit"
+                                                            class="btn btn-primary disable-button">Simpan</button>
+                                                    </div>
+                                                @endcan
                                             </div>
                                         </form>
                                     </div>

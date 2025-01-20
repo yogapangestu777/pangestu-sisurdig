@@ -27,6 +27,7 @@ class PartyController extends Controller
         return view('pages.admin.master.parties', [
             'pageTitle' => 'Pihak Terkait',
             'pageDescription' => 'Daftar pihak terkait yang tersedia di aplikasi.',
+            'isVisible' => auth()->user()->canAny(['parties.update', 'parties.delete']),
         ]);
     }
 

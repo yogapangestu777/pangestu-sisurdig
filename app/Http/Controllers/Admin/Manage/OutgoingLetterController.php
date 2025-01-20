@@ -33,6 +33,7 @@ class OutgoingLetterController extends Controller
         return view('pages.admin.manage.outgoingLetters.index', [
             'pageTitle' => 'Surat Keluar',
             'pageDescription' => 'Daftar surat keluar yang tersedia di aplikasi.',
+            'isVisible' => auth()->user()->canAny(['outgoingLetters.update', 'outgoingLetters.delete', 'outgoingLetters.show', 'outgoingLetters.download']),
         ]);
     }
 

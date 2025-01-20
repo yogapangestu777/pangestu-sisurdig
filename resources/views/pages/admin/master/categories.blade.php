@@ -6,23 +6,25 @@
                 <div class="nk-block-head nk-block-head-sm">
                     <div class="nk-block-between">
                         @include('partials.admin._page-title')
-                        <div class="nk-block-head-content">
-                            <div class="toggle-wrap nk-block-tools-toggle">
-                                <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
-                                    data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
-                                <div class="toggle-expand-content" data-content="pageMenu">
-                                    <ul class="nk-block-tools g-3">
-                                        <li>
-                                            <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#create-modal" data-title="Tambah"
-                                                data-url="{{ route('admin.master.categories.store') }}" data-method="post">
-                                                <span>Tambah</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+                        @can('categories.store')
+                            <div class="nk-block-head-content">
+                                <div class="toggle-wrap nk-block-tools-toggle">
+                                    <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1"
+                                        data-target="pageMenu"><em class="icon ni ni-more-v"></em></a>
+                                    <div class="toggle-expand-content" data-content="pageMenu">
+                                        <ul class="nk-block-tools g-3">
+                                            <li>
+                                                <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#create-modal" data-title="Tambah"
+                                                    data-url="{{ route('admin.master.categories.store') }}" data-method="post">
+                                                    <span>Tambah</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </div><!-- .nk-block-head-content -->
+                            </div><!-- .nk-block-head-content -->
+                        @endcan
                     </div><!-- .nk-block-between -->
                 </div><!-- .nk-block-head -->
                 <div class="nk-block nk-block-lg">
@@ -35,7 +37,9 @@
                                         <th>Penginput</th>
                                         <th>Nama</th>
                                         <th>Tanggal</th>
-                                        <th>Aksi</th>
+                                        @can(['categories.update', 'categories.delete'])
+                                            <th>Aksi</th>
+                                        @endcan
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,45 +49,51 @@
                                             <td>{{ $category->enhancer }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>{{ $category->created_at }}</td>
-                                            <td class="nk-tb-col nk-tb-col-tools">
-                                                <ul class="gx-1">
-                                                    <li>
-                                                        <div class="drodown">
-                                                            <a href="#"
-                                                                class="dropdown-toggle btn btn-icon btn-trigger"
-                                                                data-bs-toggle="dropdown">
-                                                                <em class="icon ni ni-more-h"></em>
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu">
-                                                                <ul class="link-list-opt no-bdr">
-                                                                    <li>
-                                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                                            data-bs-target="#create-modal" data-title="Edit"
-                                                                            data-url="{{ route('admin.master.categories.update', $category->id) }}"
-                                                                            data-method="put"
-                                                                            data-name="{{ $category->name }}">
-                                                                            <em class="icon ni ni-edit"></em>
-                                                                            <span>Edit</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <form
-                                                                            action="{{ route('admin.master.categories.destroy', $category->id) }}"
-                                                                            method="post">
-                                                                            @csrf
-                                                                            @method('delete')
-                                                                            <a href="javascript:void(0)" class="delete">
-                                                                                <em class="icon ni ni-trash"></em>
-                                                                                <span>Hapus</span>
-                                                                            </a>
-                                                                        </form>
-                                                                    </li>
-                                                                </ul>
+                                            @canany(['categories.update', 'categories.delete'])
+                                                <td class="nk-tb-col nk-tb-col-tools">
+                                                    <ul class="gx-1">
+                                                        <li>
+                                                            <div class="drodown">
+                                                                <a href="#"
+                                                                    class="dropdown-toggle btn btn-icon btn-trigger"
+                                                                    data-bs-toggle="dropdown">
+                                                                    <em class="icon ni ni-more-h"></em>
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu">
+                                                                    <ul class="link-list-opt no-bdr">
+                                                                        @can('categories.update')
+                                                                            <li>
+                                                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                                                    data-bs-target="#create-modal" data-title="Edit"
+                                                                                    data-url="{{ route('admin.master.categories.update', $category->id) }}"
+                                                                                    data-method="put"
+                                                                                    data-name="{{ $category->name }}">
+                                                                                    <em class="icon ni ni-edit"></em>
+                                                                                    <span>Edit</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        @endcan
+                                                                        @can('categories.delete')
+                                                                            <li>
+                                                                                <form
+                                                                                    action="{{ route('admin.master.categories.destroy', $category->id) }}"
+                                                                                    method="post">
+                                                                                    @csrf
+                                                                                    @method('delete')
+                                                                                    <a href="javascript:void(0)" class="delete">
+                                                                                        <em class="icon ni ni-trash"></em>
+                                                                                        <span>Hapus</span>
+                                                                                    </a>
+                                                                                </form>
+                                                                            </li>
+                                                                        @endcan
+                                                                    </ul>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </td>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            @endcan
                                         </tr>
                                     @endforeach
                                 </tbody>

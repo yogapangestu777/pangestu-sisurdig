@@ -18,8 +18,8 @@ class RolePermissionRequest extends FormRequest
 
     public function rules(): array
     {
-        $rolePermissionId = $this->route('role_permission');
-        $decryptedId = $rolePermissionId ? decryptId($this->role_permission) : null;
+        $rolePermissionId = $this->route('rolePermission');
+        $decryptedId = $rolePermissionId ? decryptId($this->rolePermission) : null;
 
         return [
             'name' => [

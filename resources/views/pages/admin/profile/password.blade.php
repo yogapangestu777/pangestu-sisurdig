@@ -17,18 +17,22 @@
                         <div class="card-aside-wrap">
                             <div class="card-content">
                                 <ul class="nav nav-tabs nav-tabs-mb-icon nav-tabs-card">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('admin.profile.account.index') }}">
-                                            <em class="icon ni ni-account-setting-alt"></em>
-                                            <span>Akun</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('admin.profile.biography.index') }}">
-                                            <em class="icon ni ni-user-check"></em>
-                                            <span>Biodata</span>
-                                        </a>
-                                    </li>
+                                    @can('account.read')
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.profile.account.index') }}">
+                                                <em class="icon ni ni-account-setting-alt"></em>
+                                                <span>Akun</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('biography.read')
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('admin.profile.biography.index') }}">
+                                                <em class="icon ni ni-user-check"></em>
+                                                <span>Biodata</span>
+                                            </a>
+                                        </li>
+                                    @endcan
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('admin.profile.password.index') }}">
                                             <em class="icon ni ni-lock-alt"></em>
@@ -132,7 +136,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary disable-button">Simpan</button>
+                                            @can('password.update')
+                                                <button type="submit" class="btn btn-primary disable-button">Simpan</button>
+                                            @endcan
                                         </form>
                                     </div>
                                 </div>

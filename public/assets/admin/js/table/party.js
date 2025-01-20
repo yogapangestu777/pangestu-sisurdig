@@ -29,5 +29,6 @@ let DT_COLUMNS = [
         data: "actions",
         orderable: false,
         searchable: false,
+        visible: isVisible
     },
 ];

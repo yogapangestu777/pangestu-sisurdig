@@ -22,17 +22,16 @@ class RolePermissionSeeder extends Seeder
 
         // Overview Permissions
         $permissions[] = Permission::create(['name' => 'overview.read']);
-        $permissions[] = Permission::create(['name' => 'overview.filter']);
 
         // Category Permissions
         $permissions[] = Permission::create(['name' => 'categories.read']);
-        $permissions[] = Permission::create(['name' => 'categories.create']);
+        $permissions[] = Permission::create(['name' => 'categories.store']);
         $permissions[] = Permission::create(['name' => 'categories.update']);
         $permissions[] = Permission::create(['name' => 'categories.delete']);
 
         // Party Permissions
         $permissions[] = Permission::create(['name' => 'parties.read']);
-        $permissions[] = Permission::create(['name' => 'parties.create']);
+        $permissions[] = Permission::create(['name' => 'parties.store']);
         $permissions[] = Permission::create(['name' => 'parties.update']);
         $permissions[] = Permission::create(['name' => 'parties.delete']);
 
@@ -41,16 +40,15 @@ class RolePermissionSeeder extends Seeder
         $permissions[] = Permission::create(['name' => 'users.create']);
         $permissions[] = Permission::create(['name' => 'users.update']);
         $permissions[] = Permission::create(['name' => 'users.delete']);
-        $permissions[] = Permission::create(['name' => 'users.activate']);
-        $permissions[] = Permission::create(['name' => 'users.deactivate']);
-        $permissions[] = Permission::create(['name' => 'users.reset_password']);
+        $permissions[] = Permission::create(['name' => 'users.toggelStatus']);
+        $permissions[] = Permission::create(['name' => 'users.resetPassword']);
 
         // Incoming Letter Permissions
         $permissions[] = Permission::create(['name' => 'incoming_letters.read']);
         $permissions[] = Permission::create(['name' => 'incoming_letters.create']);
         $permissions[] = Permission::create(['name' => 'incoming_letters.update']);
         $permissions[] = Permission::create(['name' => 'incoming_letters.delete']);
-        $permissions[] = Permission::create(['name' => 'incoming_letters.view']);
+        $permissions[] = Permission::create(['name' => 'incoming_letters.show']);
         $permissions[] = Permission::create(['name' => 'incoming_letters.download']);
 
         // Outgoing Letter Permissions
@@ -58,7 +56,7 @@ class RolePermissionSeeder extends Seeder
         $permissions[] = Permission::create(['name' => 'outgoing_letters.create']);
         $permissions[] = Permission::create(['name' => 'outgoing_letters.update']);
         $permissions[] = Permission::create(['name' => 'outgoing_letters.delete']);
-        $permissions[] = Permission::create(['name' => 'outgoing_letters.view']);
+        $permissions[] = Permission::create(['name' => 'outgoing_letters.show']);
         $permissions[] = Permission::create(['name' => 'outgoing_letters.download']);
 
         // Account Permissions

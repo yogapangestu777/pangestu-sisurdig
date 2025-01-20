@@ -31,14 +31,36 @@
                                 </div>
                             </div>
                             <div class="dropdown-inner">
-                                <ul class="link-list">
-                                    <li>
-                                        <a href="{{ route('admin.profile.account.index') }}">
-                                            <em class="icon ni ni-user-list"></em>
-                                            <span>Akun</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                @canany(['account.read', 'biography.read','password.read'])
+                                    <ul class="link-list">
+                                        @can('account.read')
+                                            <li>
+                                                <a href="{{ route('admin.profile.account.index') }}">
+                                                    <em class="icon ni ni-user-list"></em>
+                                                    <span>Akun</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+
+                                        @can('biography.read')
+                                            <li>
+                                                <a href="{{ route('admin.profile.biography.index') }}">
+                                                    <em class="icon ni ni-user-c"></em>
+                                                    <span>Biografi</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+
+                                        @can('password.read')
+                                            <li>
+                                                <a href="{{ route('admin.profile.password.index') }}">
+                                                    <em class="icon ni ni-lock-alt"></em>
+                                                    <span>Password</span>
+                                                </a>
+                                            </li>
+                                        @endcan
+                                    </ul>
+                                @endcan
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
