@@ -4,8 +4,13 @@ namespace App\Services;
 
 use App\Models\IncomingLetter;
 use App\Repositories\Contracts\IncomingLetterRepositoryInterface;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 
 class IncomingLetterService
@@ -19,10 +24,13 @@ class IncomingLetterService
         return $this->incomingLetterRepo->incomingLettersQuery();
     }
 
-    public function findById(string $id): object
+    public function findById(string $id): IncomingLetter
     {
-        $incomingLetter = $this->incomingLetterRepo->findById(decryptId($id));
+        return $this->incomingLetterRepo->findById(decryptId($id));
+    }
 
+    public function transformData(IncomingLetter $incomingLetter): object
+    {
         return (object) [
             'id' => encryptId($incomingLetter->id),
             'reference_number' => $incomingLetter->reference_number,
@@ -33,30 +41,92 @@ class IncomingLetterService
         ];
     }
 
-    public function createIncomingLetter(array $data): void
+    public function getAttachments(string $id): Collection
     {
-        $this->incomingLetterRepo->create([
-            'user_id' => auth()->id(),
-            'reference_number' => $data['reference_number'],
-            'subject' => $data['subject'],
-            'description' => $data['description'],
-            'category_id' => $data['category'],
-            'party_id' => $data['party'],
-        ]);
+        $incomingLetter = $this->incomingLetterRepo->findById(decryptId($id));
+        $attachments = fetchAttachments($incomingLetter, 'incoming-letters');
+
+        return $attachments;
     }
 
-    public function updateIncomingLetter(string $id, array $data): void
+    public function prepareDownload(string $id): array
+    {
+        $incomingLetter = $this->incomingLetterRepo->findById(decryptId($id));
+        $attachment = fetchAttachments($incomingLetter, 'incoming-letters');
+        $firstAttachment = $attachment->first();
+
+        $headers = [
+            'Content-Type' => "application/{$firstAttachment->extension}",
+            'Content-Disposition' => "attachment; filename={$incomingLetter->subject}.".$firstAttachment->extension,
+        ];
+
+        $prepareDownload = [
+            $firstAttachment->storageUrl,
+            Response::HTTP_OK,
+            $headers,
+        ];
+
+        return $prepareDownload;
+    }
+
+    public function createIncomingLetter(array $data): bool
+    {
+        DB::beginTransaction();
+        try {
+            $incomingLetter = $this->incomingLetterRepo->create([
+                'user_id' => auth()->id(),
+                'reference_number' => $data['reference_number'],
+                'subject' => $data['subject'],
+                'description' => $data['description'],
+                'category_id' => $data['category'],
+                'party_id' => $data['party'],
+            ]);
+
+            updateAttachments($data['file'], $incomingLetter->id, IncomingLetter::class);
+
+            DB::commit();
+
+            notify()->success('Surat masuk berhasil ditambahkan.', 'Berhasil');
+
+            return true;
+        } catch (Exception $e) {
+            DB::rollBack();
+            notify()->error('Surat masuk gagal ditambahkan.Silakan coba lagi dan jika masalah terus berlanjut,silakan hubungi pengembang.', 'Gagal');
+            Log::error("Error: {$e->getMessage()}");
+
+            return false;
+        }
+    }
+
+    public function updateIncomingLetter(string $id, array $data): bool
     {
         $decrytedId = decryptId($id);
         $incomingLetter = $this->incomingLetterRepo->findById($decrytedId);
 
-        $this->incomingLetterRepo->update($incomingLetter, [
-            'reference_number' => $data['reference_number'],
-            'subject' => $data['subject'],
-            'description' => $data['description'],
-            'category_id' => $data['category'],
-            'party_id' => $data['party'],
-        ]);
+        DB::beginTransaction();
+        try {
+            $this->incomingLetterRepo->update($incomingLetter, [
+                'reference_number' => $data['reference_number'],
+                'subject' => $data['subject'],
+                'description' => $data['description'],
+                'category_id' => $data['category'],
+                'party_id' => $data['party'],
+            ]);
+
+            updateAttachments($data['file'], $incomingLetter->id, IncomingLetter::class);
+
+            DB::commit();
+
+            notify()->success('Surat masuk berhasil diperbarui.', 'Berhasil');
+
+            return true;
+        } catch (Exception $e) {
+            DB::rollBack();
+            notify()->error('Surat masuk gagal diperbarui.Silakan coba lagi dan jika masalah terus berlanjut,silakan hubungi pengembang.', 'Gagal');
+            Log::error("Error: {$e->getMessage()}");
+
+            return false;
+        }
     }
 
     public function deleteIncomingLetter(string $id): void
@@ -82,10 +152,30 @@ class IncomingLetterService
     {
         return view('partials.admin.datatable._actions', [
             'buttons' => [
+                $this->generateViewButton($incomingLetter),
+                $this->generateDownloadButton($incomingLetter),
                 $this->generateEditButton($incomingLetter),
                 $this->generateDeleteButton($incomingLetter),
             ],
         ])->render();
+    }
+
+    private function generateViewButton(IncomingLetter $incomingLetter): array
+    {
+        return [
+            'title' => 'Lihat',
+            'url' => route('admin.manage.incomingLetters.show', encryptId($incomingLetter->id)),
+            'icon' => 'eye',
+        ];
+    }
+
+    private function generateDownloadButton(IncomingLetter $incomingLetter): array
+    {
+        return [
+            'title' => 'Unduh',
+            'url' => route('admin.manage.incomingLetters.download', encryptId($incomingLetter->id)),
+            'icon' => 'download',
+        ];
     }
 
     private function generateEditButton(IncomingLetter $incomingLetter): array

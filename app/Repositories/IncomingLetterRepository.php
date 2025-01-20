@@ -22,9 +22,9 @@ class IncomingLetterRepository implements IncomingLetterRepositoryInterface
         return $this->incomingLetterModel->find($id);
     }
 
-    public function create(array $data): void
+    public function create(array $data): IncomingLetter
     {
-        $this->incomingLetterModel->create($data);
+        return $this->incomingLetterModel->create($data);
     }
 
     public function update(IncomingLetter $incomingLetter, array $data): void

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class IncomingLetter extends Model
@@ -32,5 +33,10 @@ class IncomingLetter extends Model
     public function party(): BelongsTo
     {
         return $this->belongsTo(Party::class);
+    }
+
+    public function attachment(): MorphOne
+    {
+        return $this->morphOne(Attachment::class, 'attachmentable');
     }
 }

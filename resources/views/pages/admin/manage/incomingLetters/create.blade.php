@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/libs/dropzone.css?ver=1.0.0') }}">
+@endsection
 @section('app')
     <div class="nk-content nk-content-fluid">
         <div class="container-xl wide-lg">
@@ -135,6 +138,26 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label for="file" class="form-label">File</label>
+                                                    <div class="upload-zone file @error('file') is-invalid @enderror"
+                                                        data-input-name="file">
+                                                        <div class="dz-message" data-dz-message>
+                                                            <span class="dz-message-text">Seret file ke sini untuk
+                                                                mengunggah</span>
+                                                            <span class="dz-message-text">atau</span>
+                                                            <button type="button" class="btn btn-primary">Pilih</button>
+                                                        </div>
+                                                        <div class="previews-container"></div>
+                                                    </div>
+                                                    @error('file')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -147,5 +170,10 @@
     </div>
 @endsection
 @section('scripts')
+    <script>
+        let uploadUrl = "{{ route('admin.attachment.upload', ['folder' => 'incoming-letters']) }}";
+    </script>
+    <script src="{{ asset('assets/admin/js/libs/dropzone/message.js?ver=1.0.0') }}"></script>
+    <script src="{{ asset('assets/admin/js/libs/dropzone/create.js?ver=1.0.0') }}"></script>
     <script src="{{ asset('assets/admin/js/interactions/disable-button.js?ver=1.0.0') }}"></script>
 @endsection

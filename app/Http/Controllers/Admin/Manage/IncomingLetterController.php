@@ -11,6 +11,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Support\Facades\Response as Download;
 
 class IncomingLetterController extends Controller
 {
@@ -44,33 +46,51 @@ class IncomingLetterController extends Controller
         ]);
     }
 
+    public function show(string $id): View
+    {
+        return view('pages.admin.manage.incomingLetters.show', [
+            'pageTitle' => 'Detail Surat Masuk',
+            'pageDescription' => 'Detail surat masuk yang terdaftar di aplikasi.',
+            'attachments' => $this->incomingLetterService->getAttachments($id),
+        ]);
+    }
+
+    public function download(string $id): HttpResponse
+    {
+        $prepareDownload = $this->incomingLetterService->prepareDownload($id);
+
+        return Download::make($prepareDownload[0], $prepareDownload[1], $prepareDownload[2]);
+    }
+
     public function store(IncomingLetterRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
-        $this->incomingLetterService->createIncomingLetter($validatedData);
-        notify()->success('Surat masuk berhasil ditambahkan.', 'Berhasil');
+        $result = $this->incomingLetterService->createIncomingLetter($validatedData);
 
-        return redirect()->route('admin.manage.incomingLetters.index');
+        return $result ? redirect()->route('admin.manage.incomingLetters.index') : back()->withInput();
     }
 
     public function edit(string $id): View
     {
+        $incomingLetter = $this->incomingLetterService->findById($id);
+        $transformedData = $this->incomingLetterService->transFormData($incomingLetter);
+
         return view('pages.admin.manage.incomingLetters.edit', [
             'pageTitle' => 'Edit Surat Masuk',
             'pageDescription' => 'Edit data surat masuk yang terdaftar di aplikasi.',
             'categories' => $this->categoryService->getcategories(),
             'parties' => $this->partyService->getParties(),
-            'incomingLetter' => $this->incomingLetterService->findById($id),
+            'incomingLetter' => $transformedData,
+            'attachments' => $this->incomingLetterService->getAttachments($id),
         ]);
     }
 
     public function update(string $id, IncomingLetterRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
-        $this->incomingLetterService->updateIncomingLetter($id, $validatedData);
-        notify()->success('Surat masuk berhasil diperbarui.', 'Berhasil');
+        $result = $this->incomingLetterService->updateIncomingLetter($id, $validatedData);
 
-        return redirect()->route('admin.manage.incomingLetters.index');
+        return $result ? redirect()->route('admin.manage.incomingLetters.index') : back()->withInput();
     }
 
     public function destroy(string $id): RedirectResponse

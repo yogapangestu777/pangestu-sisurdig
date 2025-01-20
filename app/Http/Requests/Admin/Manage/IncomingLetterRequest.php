@@ -63,6 +63,10 @@ class IncomingLetterRequest extends FormRequest
                 'required',
                 Rule::exists('parties', 'id'),
             ],
+            'file' => [
+                'required',
+                'string',
+            ],
         ];
     }
 
@@ -85,6 +89,9 @@ class IncomingLetterRequest extends FormRequest
 
             'party.required' => 'Perusahaan wajib diisi',
             'party.exists' => 'Perusahaan tidak valid',
+
+            'file.required' => 'File wajib diisi',
+            'file.string' => 'File harus berupa string',
         ];
     }
 

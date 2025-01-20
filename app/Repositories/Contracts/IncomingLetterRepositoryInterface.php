@@ -11,7 +11,7 @@ interface IncomingLetterRepositoryInterface
 
     public function findById(string $id): ?IncomingLetter;
 
-    public function create(array $data): void;
+    public function create(array $data): IncomingLetter;
 
     public function update(IncomingLetter $incomingLetter, array $data): void;
 

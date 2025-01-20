@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AttachmentController;
 use App\Http\Controllers\Admin\Manage\IncomingLetterController;
 use App\Http\Controllers\Admin\Manage\UserController;
 use App\Http\Controllers\Admin\Master\CategoryController;
@@ -25,6 +26,8 @@ Route::group([
     'middleware' => 'auth',
 ], function () {
     Route::get('overview', [OverviewController::class, 'index'])->name('admin.overview');
+
+    Route::post('upload-attachment/{folder}', [AttachmentController::class, 'upload'])->name('admin.attachment.upload');
 
     Route::prefix('profile')->group(function () {
         Route::resource('account', AccountController::class)
@@ -84,15 +87,16 @@ Route::group([
         Route::put('users/{user}/toggle-status', [UserController::class, 'toggleStatus'])->name('admin.manage.users.toggleStatus');
 
         Route::resource('incoming-letters', IncomingLetterController::class)
-            ->except(['show'])
             ->names([
                 'index' => 'admin.manage.incomingLetters.index',
                 'create' => 'admin.manage.incomingLetters.create',
                 'store' => 'admin.manage.incomingLetters.store',
+                'show' => 'admin.manage.incomingLetters.show',
                 'edit' => 'admin.manage.incomingLetters.edit',
                 'update' => 'admin.manage.incomingLetters.update',
                 'destroy' => 'admin.manage.incomingLetters.destroy',
             ]);
+        Route::get('incoming-letters/{incomingLetter}/download', [IncomingLetterController::class, 'download'])->name('admin.manage.incomingLetters.download');
     });
 
     Route::prefix('setting')->group(function () {
