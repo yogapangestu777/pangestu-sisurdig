@@ -35,7 +35,8 @@
         },
         "files": [
             "app/Helpers/IdEncoder.php",
-            "app/Helpers/DateManipulator.php"
+            "app/Helpers/DateManipulator.php",
+            "app/Helpers/AttachmentHandler.php"
         ]
     },
     "autoload-dev": {
