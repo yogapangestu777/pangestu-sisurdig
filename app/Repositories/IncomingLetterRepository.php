@@ -36,4 +36,12 @@ class IncomingLetterRepository implements IncomingLetterRepositoryInterface
     {
         $incomingLetter->delete();
     }
+
+    public function count(?array $dateRange = null): int
+    {
+        return $this->incomingLetterModel
+            ->when($dateRange, function ($query) use ($dateRange) {
+                $query->whereBetween('created_at', $dateRange);
+            })->count();
+    }
 }

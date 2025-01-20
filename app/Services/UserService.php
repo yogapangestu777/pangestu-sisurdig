@@ -174,4 +174,9 @@ class UserService
         $this->userRepo->toggleStatus($user);
         notify()->success('Status pengguna berhasil diubah.', 'Berhasil');
     }
+
+    public function countUser(?array $dateRange = null): int
+    {
+        return $this->userRepo->count($dateRange);
+    }
 }

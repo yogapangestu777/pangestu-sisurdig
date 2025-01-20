@@ -42,4 +42,12 @@ class PartyRepository implements PartyRepositoryInterface
     {
         $party->delete();
     }
+
+    public function count(?array $dateRange = null): int
+    {
+        return $this->partyModel
+            ->when($dateRange, function ($query) use ($dateRange) {
+                $query->whereBetween('created_at', $dateRange);
+            })->count();
+    }
 }

@@ -27,6 +27,7 @@ Route::group([
     'middleware' => 'auth',
 ], function () {
     Route::get('overview', [OverviewController::class, 'index'])->name('admin.overview');
+    Route::get('overview/get-data-by-{time}', [OverviewController::class, 'getDataByTime'])->name('admin.overview.getDataByTime');
 
     Route::post('upload-attachment/{folder}', [AttachmentController::class, 'upload'])->name('admin.attachment.upload');
 

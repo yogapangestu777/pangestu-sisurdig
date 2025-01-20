@@ -16,4 +16,6 @@ interface CategoryRepositoryInterface
     public function update(Category $category, array $data): void;
 
     public function delete(Category $category): void;
+
+    public function count(?array $dateRange = null): int;
 }

@@ -137,6 +137,23 @@ class OutgoingLetterService
         $this->outgoingLetterRepo->delete($outgoingLetter);
     }
 
+    public function countOutgoingLetter(): int
+    {
+        return $this->outgoingLetterRepo->count();
+    }
+
+    public function getMostFrequentLetterParty(?array $dateRange = null): Collection
+    {
+        return $this->outgoingLetterRepo->getMostFrequentLetterParty(5, $dateRange)
+            ->map(function ($item) {
+                return (object) [
+                    'id' => encryptId($item->party_id),
+                    'name' => $item->party->name ?? '-unknown-',
+                    'amount' => $item->amount,
+                ];
+            });
+    }
+
     public function renderOutgoingLetterDataTable(Builder $parties): JsonResponse
     {
         return DataTables::eloquent($parties)

@@ -19,4 +19,6 @@ interface PartyRepositoryInterface
     public function update(Party $party, array $data): void;
 
     public function delete(Party $party): void;
+
+    public function count(?array $dateRange = null): int;
 }

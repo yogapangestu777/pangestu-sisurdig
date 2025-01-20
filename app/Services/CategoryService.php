@@ -46,4 +46,9 @@ class CategoryService
 
         $this->categoryRepo->delete($category);
     }
+
+    public function countCategory(?array $dateRange = null): int
+    {
+        return $this->categoryRepo->count($dateRange);
+    }
 }

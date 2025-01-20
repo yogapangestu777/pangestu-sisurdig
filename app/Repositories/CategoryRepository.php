@@ -36,4 +36,12 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         $category->delete();
     }
+
+    public function count(?array $dateRange = null): int
+    {
+        return $this->categoryModel
+            ->when($dateRange, function ($query) use ($dateRange) {
+                $query->whereBetween('created_at', $dateRange);
+            })->count();
+    }
 }

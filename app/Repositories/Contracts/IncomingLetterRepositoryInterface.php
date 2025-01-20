@@ -16,4 +16,6 @@ interface IncomingLetterRepositoryInterface
     public function update(IncomingLetter $incomingLetter, array $data): void;
 
     public function delete(IncomingLetter $incomingLetter): void;
+
+    public function count(?array $dateRange = null): int;
 }

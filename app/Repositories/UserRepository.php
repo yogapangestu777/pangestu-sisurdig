@@ -106,4 +106,12 @@ class UserRepository implements UserRepositoryInterface
             'is_active' => $user->is_active === '1' ? '0' : '1',
         ]);
     }
+
+    public function count(?array $dateRange = null): int
+    {
+        return $this->userModel
+            ->when($dateRange, function ($query) use ($dateRange) {
+                $query->whereBetween('created_at', $dateRange);
+            })->count();
+    }
 }

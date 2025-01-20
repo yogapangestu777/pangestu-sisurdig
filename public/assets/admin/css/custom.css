@@ -1,0 +1,103 @@
+:root {
+    --bs-blue: #559bfb;
+    --bs-indigo: #2c3782;
+    --bs-purple: #816bff;
+    --bs-pink: #ff63a5;
+    --bs-red: #e85347;
+    --bs-orange: #ffa353;
+    --bs-yellow: #f4bd0e;
+    --bs-green: #1ee0ac;
+    --bs-teal: #20c997;
+    --bs-cyan: #09c2de;
+    --bs-white: #fff;
+    --bs-gray: #8091a7;
+    --bs-gray-dark: #2b3748;
+    --bs-gray-100: #ebeef2;
+    --bs-gray-200: #e5e9f2;
+    --bs-gray-300: #dbdfea;
+    --bs-gray-400: #b7c2d0;
+    --bs-gray-500: #8091a7;
+    --bs-gray-600: #3c4d62;
+    --bs-gray-700: #344357;
+    --bs-gray-800: #2b3748;
+    --bs-gray-900: #1f2b3a;
+    --bs-primary: #0971fe;
+    --bs-secondary: #364a63;
+    --bs-success: #1ee0ac;
+    --bs-info: #09c2de;
+    --bs-warning: #f4bd0e;
+    --bs-danger: #e85347;
+    --bs-light: #e5e9f2;
+    --bs-dark: #1f2b3a;
+    --bs-gray: #8091a7;
+    --bs-lighter: #f5f6fa;
+}
+
+.tox-statusbar__branding {
+    display: none;
+}
+
+.nk-order-ovwg-data.outline-success {
+    border-color: var(--bs-success);
+}
+
+.nk-order-ovwg-data.outline-success .amount,
+.nk-order-ovwg-data.outline-success .title .icon {
+    color: var(--bs-success);
+}
+
+.nk-order-ovwg-data.outline-blue {
+    border-color: var(--bs-blue);
+}
+
+.nk-order-ovwg-data.outline-blue .amount,
+.nk-order-ovwg-data.outline-blue .title .icon {
+    color: var(--bs-blue);
+}
+
+.nk-order-ovwg-data.outline-indigo {
+    border-color: var(--bs-indigo);
+}
+
+.nk-order-ovwg-data.outline-indigo .amount,
+.nk-order-ovwg-data.outline-indigo .title .icon {
+    color: var(--bs-indigo);
+}
+
+.nk-order-ovwg-data.outline-purple {
+    border-color: var(--bs-purple);
+}
+
+.nk-order-ovwg-data.outline-purple .amount,
+.nk-order-ovwg-data.outline-purple .title .icon {
+    color: var(--bs-purple);
+}
+
+.nk-order-ovwg-data.outline-pink {
+    border-color: var(--bs-pink);
+}
+
+.nk-order-ovwg-data.outline-pink .amount,
+.nk-order-ovwg-data.outline-pink .title .icon {
+    color: var(--bs-pink);
+}
+
+.nk-order-ovwg-data.outline-orange {
+    border-color: var(--bs-orange);
+}
+
+.nk-order-ovwg-data.outline-orange .amount,
+.nk-order-ovwg-data.outline-orange .title .icon {
+    color: var(--bs-orange);
+}
+
+.svg-bg,
+.nk-order-ovwg-data {
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.svg-bg:hover,
+.nk-order-ovwg-data:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+}

@@ -29,4 +29,6 @@ interface UserRepositoryInterface
     public function resetPassword(User $user): void;
 
     public function toggleStatus(User $user): void;
+
+    public function count(?array $dateRange = null): int;
 }

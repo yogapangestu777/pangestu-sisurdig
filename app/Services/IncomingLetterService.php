@@ -137,6 +137,11 @@ class IncomingLetterService
         $this->incomingLetterRepo->delete($incomingLetter);
     }
 
+    public function countIncomingLetter(?array $dateRange = null): int
+    {
+        return $this->incomingLetterRepo->count($dateRange);
+    }
+
     public function renderIncomingLetterDataTable(Builder $parties): JsonResponse
     {
         return DataTables::eloquent($parties)

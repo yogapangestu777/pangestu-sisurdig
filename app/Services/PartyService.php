@@ -53,6 +53,11 @@ class PartyService
         $this->partyRepo->delete($party);
     }
 
+    public function countParty(?array $dateRange = null): int
+    {
+        return $this->partyRepo->count($dateRange);
+    }
+
     public function renderPartyDataTable(Builder $parties): JsonResponse
     {
         return DataTables::eloquent($parties)
