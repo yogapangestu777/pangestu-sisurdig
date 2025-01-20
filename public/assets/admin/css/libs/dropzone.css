@@ -1,0 +1,159 @@
+.upload-zone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+    padding: 20px;
+}
+
+.upload-zone.is-invalid {
+    border-color: #dc3545;
+}
+
+.upload-zone .dz-message {
+    text-align: center;
+}
+
+.upload-zone .previews-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+/* Styles for multiple file upload */
+.upload-zone.multiple .previews-container:after {
+    content: "";
+    flex: 0 0 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+}
+
+.upload-zone.multiple .dz-preview {
+    flex: 0 0 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+}
+
+/* Styles for single file upload */
+.upload-zone:not(.multiple) .dz-preview {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.upload-zone .dz-preview {
+    position: relative;
+    margin: 0;
+    z-index: 10;
+    /* Ensure previews are above the message */
+}
+
+.upload-zone .dz-preview .dz-image {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.upload-zone .dz-preview .dz-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-zone .dz-preview .dz-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.upload-zone .dz-preview .dz-progress {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+}
+
+.upload-zone .dz-preview .dz-progress .dz-upload {
+    background: #0087F7;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    transition: width 300ms ease-in-out;
+}
+
+.upload-zone .dz-preview .dz-success-mark,
+.upload-zone .dz-preview .dz-error-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.upload-zone .dz-preview.dz-success .dz-success-mark {
+    display: block;
+}
+
+.upload-zone .dz-preview.dz-error .dz-error-mark {
+    display: block;
+}
+
+.upload-zone .dz-preview .dz-remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 20;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-zone .dz-preview .dz-remove:hover {
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .upload-zone.multiple .dz-preview {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .upload-zone.multiple .dz-preview {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+.upload-zone.error-state {
+    border-color: red;
+}
+
+.upload-zone.error-state .dz-message {
+    color: red;
+}

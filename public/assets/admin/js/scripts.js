@@ -403,35 +403,6 @@
                 }
             }
         });
-    }; // Dropzone @v1.1
-
-
-    NioApp.Dropzone = function (elm, opt) {
-        if ($(elm).exists()) {
-            $(elm).each(function () {
-                var maxFiles = $(elm).data('max-files'),
-                    maxFiles = maxFiles ? maxFiles : null;
-                var maxFileSize = $(elm).data('max-file-size'),
-                    maxFileSize = maxFileSize ? maxFileSize : 256;
-                var acceptedFiles = $(elm).data('accepted-files'),
-                    acceptedFiles = acceptedFiles ? acceptedFiles : null;
-                var def = {
-                    autoDiscover: false,
-                    maxFiles: maxFiles,
-                    maxFilesize: maxFileSize,
-                    acceptedFiles: acceptedFiles
-                },
-                    attr = opt ? extend(def, opt) : def;
-                $(this).addClass('dropzone').dropzone(attr);
-            });
-        }
-    }; // Dropzone Init @v1.0
-
-
-    NioApp.Dropzone.init = function () {
-        NioApp.Dropzone('.upload-zone', {
-            url: "/images"
-        });
     }; // Wizard @v1.0
 
 
@@ -995,7 +966,6 @@
         NioApp.Knob.init();
         NioApp.Range.init();
         NioApp.Select2.init();
-        NioApp.Dropzone.init();
         NioApp.Slider.init();
         NioApp.DataTable.init();
         NioApp.Tagify.init();
