@@ -28,6 +28,14 @@
                     </div><!-- .nk-block-between -->
                 </div><!-- .nk-block-head -->
                 <div class="nk-block nk-block-lg">
+                    <div class="alert alert-pro alert-info">
+                        <div class="alert-text">
+                            <h6>Informasi Pengisian</h6>
+                            <p>Jika Anda telah memiliki dokumen surat, maka Anda dapat mengisi bagian file dan mengosongkan
+                                bagian konten. Dan sebaliknya, karena untuk keperluan unduh dokumen yang menjadi prioritas
+                                maka data yang diisikan akan diutamakan yang berupa file.</p>
+                        </div>
+                    </div>
                     <form action="{{ route('admin.manage.outgoingLetters.store') }}" method="post" autocomplete="off">
                         @csrf
                         <div class="row">

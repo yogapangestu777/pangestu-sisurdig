@@ -28,6 +28,14 @@
                     </div><!-- .nk-block-between -->
                 </div><!-- .nk-block-head -->
                 <div class="nk-block nk-block-lg">
+                    <div class="alert alert-pro alert-info">
+                        <div class="alert-text">
+                            <h6>Informasi Pengisian</h6>
+                            <p>Jika Anda telah memiliki dokumen surat, maka Anda dapat mengisi bagian file dan mengosongkan
+                                bagian konten. Dan sebaliknya, karena untuk keperluan unduh dokumen yang menjadi prioritas
+                                maka data yang diisikan akan diutamakan yang berupa file.</p>
+                        </div>
+                    </div>
                     <form action="{{ route('admin.manage.outgoingLetters.update', $outgoingLetter->id) }}" method="post"
                         autocomplete="off">
                         @csrf
@@ -179,4 +187,7 @@
     <script src="{{ asset('assets/admin/js/libs/dropzone/message.js?ver=1.0.0') }}"></script>
     <script src="{{ asset('assets/admin/js/libs/dropzone/edit.js?ver=1.0.0') }}"></script>
     <script src="{{ asset('assets/admin/js/interactions/disable-button.js?ver=1.0.0') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/uq0tce17zffxdk3vxbmk7s7nvv7hg15t5ntgqfyzhmbxu3g4/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script src="{{ asset('assets/admin/js/libs/editors/tinymce.js?ver=1.0.0') }}"></script>
 @endsection
