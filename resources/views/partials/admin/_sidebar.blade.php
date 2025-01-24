@@ -52,7 +52,7 @@
                             @endcan
                         @endcanany
 
-                        @canany(['users.read', 'incoming_letters.read', 'outgoing_letters.read'])
+                        @canany(['users.read', 'incomingLetters.read', 'outgoingLetters.read'])
                             <li class="nk-menu-heading">
                                 <h6 class="overline-title text-primary-alt">Kelola</h6>
                             </li>
@@ -64,7 +64,7 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('incoming_letters.read')
+                            @can('incomingLetters.read')
                                 <li class="nk-menu-item">
                                     <a href="{{ route('admin.manage.incomingLetters.index') }}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-inbox-in"></em></span>
@@ -72,7 +72,7 @@
                                     </a>
                                 </li>
                             @endcan
-                            @can('outgoing_letters.read')
+                            @can('outgoingLetters.read')
                                 <li class="nk-menu-item">
                                     <a href="{{ route('admin.manage.outgoingLetters.index') }}" class="nk-menu-link">
                                         <span class="nk-menu-icon"><em class="icon ni ni-inbox-out"></em></span>

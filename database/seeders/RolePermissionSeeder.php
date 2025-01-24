@@ -44,20 +44,20 @@ class RolePermissionSeeder extends Seeder
         $permissions[] = Permission::create(['name' => 'users.resetPassword']);
 
         // Incoming Letter Permissions
-        $permissions[] = Permission::create(['name' => 'incoming_letters.read']);
-        $permissions[] = Permission::create(['name' => 'incoming_letters.create']);
-        $permissions[] = Permission::create(['name' => 'incoming_letters.update']);
-        $permissions[] = Permission::create(['name' => 'incoming_letters.delete']);
-        $permissions[] = Permission::create(['name' => 'incoming_letters.show']);
-        $permissions[] = Permission::create(['name' => 'incoming_letters.download']);
+        $permissions[] = Permission::create(['name' => 'incomingLetters.read']);
+        $permissions[] = Permission::create(['name' => 'incomingLetters.create']);
+        $permissions[] = Permission::create(['name' => 'incomingLetters.update']);
+        $permissions[] = Permission::create(['name' => 'incomingLetters.delete']);
+        $permissions[] = Permission::create(['name' => 'incomingLetters.show']);
+        $permissions[] = Permission::create(['name' => 'incomingLetters.download']);
 
         // Outgoing Letter Permissions
-        $permissions[] = Permission::create(['name' => 'outgoing_letters.read']);
-        $permissions[] = Permission::create(['name' => 'outgoing_letters.create']);
-        $permissions[] = Permission::create(['name' => 'outgoing_letters.update']);
-        $permissions[] = Permission::create(['name' => 'outgoing_letters.delete']);
-        $permissions[] = Permission::create(['name' => 'outgoing_letters.show']);
-        $permissions[] = Permission::create(['name' => 'outgoing_letters.download']);
+        $permissions[] = Permission::create(['name' => 'outgoingLetters.read']);
+        $permissions[] = Permission::create(['name' => 'outgoingLetters.create']);
+        $permissions[] = Permission::create(['name' => 'outgoingLetters.update']);
+        $permissions[] = Permission::create(['name' => 'outgoingLetters.delete']);
+        $permissions[] = Permission::create(['name' => 'outgoingLetters.show']);
+        $permissions[] = Permission::create(['name' => 'outgoingLetters.download']);
 
         // Account Permissions
         $permissions[] = Permission::create(['name' => 'account.read']);
