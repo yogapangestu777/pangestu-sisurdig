@@ -18,9 +18,9 @@ class OutgoingLetterRequest extends FormRequest
 
     public function prepareForValidation(): void
     {
-        if (! is_null($this->outgoing_letter)) {
+        if (! is_null($this->outgoingLetter)) {
             $this->merge([
-                'outgoing_letter' => decryptId($this->outgoing_letter),
+                'outgoingLetter' => decryptId($this->outgoingLetter),
             ]);
         }
 
@@ -44,7 +44,7 @@ class OutgoingLetterRequest extends FormRequest
                 'required',
                 'string',
                 'max:150',
-                Rule::unique('outgoing_letters', 'reference_number')->ignore($this->outgoing_letter),
+                Rule::unique('outgoing_letters', 'reference_number')->ignore($this->outgoingLetter),
             ],
             'subject' => [
                 'required',
@@ -52,7 +52,7 @@ class OutgoingLetterRequest extends FormRequest
                 'max:200',
             ],
             'content' => [
-                'required',
+                'nullable',
                 'string',
             ],
             'category' => [
@@ -64,7 +64,7 @@ class OutgoingLetterRequest extends FormRequest
                 Rule::exists('parties', 'id'),
             ],
             'file' => [
-                'required',
+                'nullable',
                 'string',
             ],
         ];
@@ -82,7 +82,6 @@ class OutgoingLetterRequest extends FormRequest
             'subject.string' => 'Subjek harus berupa string',
             'subject.max' => 'Subjek harus kurang dari :max karakter',
 
-            'content.required' => 'Konten wajib diisi',
             'content.string' => 'Konten harus berupa string',
 
             'category.required' => 'Kategori wajib diisi',
@@ -91,7 +90,6 @@ class OutgoingLetterRequest extends FormRequest
             'party.required' => 'Perusahaan wajib diisi',
             'party.exists' => 'Perusahaan tidak valid',
 
-            'file.required' => 'File wajib diisi',
             'file.string' => 'File harus berupa string',
         ];
     }

@@ -133,7 +133,7 @@ Route::group([
 
         Route::put('users/{user}/reset-password', [UserController::class, 'resetPassword'])
             ->name('admin.manage.users.resetPassword')
-            ->middleware('permission:users.reset_password');
+            ->middleware('permission:users.resetPassword');
 
         Route::put('users/{user}/toggle-status', [UserController::class, 'toggleStatus'])
             ->name('admin.manage.users.toggleStatus')
@@ -142,68 +142,68 @@ Route::group([
         // Incoming Letters Routes
         Route::get('incoming-letters', [IncomingLetterController::class, 'index'])
             ->name('admin.manage.incomingLetters.index')
-            ->middleware('permission:incoming_letters.read');
+            ->middleware('permission:incomingLetters.read');
 
         Route::get('incoming-letters/create', [IncomingLetterController::class, 'create'])
             ->name('admin.manage.incomingLetters.create')
-            ->middleware('permission:incoming_letters.create');
+            ->middleware('permission:incomingLetters.create');
 
         Route::post('incoming-letters', [IncomingLetterController::class, 'store'])
             ->name('admin.manage.incomingLetters.store')
-            ->middleware('permission:incoming_letters.create');
+            ->middleware('permission:incomingLetters.create');
 
         Route::get('incoming-letters/{incomingLetter}', [IncomingLetterController::class, 'show'])
             ->name('admin.manage.incomingLetters.show')
-            ->middleware('permission:incoming_letters.show');
+            ->middleware('permission:incomingLetters.show');
 
         Route::get('incoming-letters/{incomingLetter}/edit', [IncomingLetterController::class, 'edit'])
             ->name('admin.manage.incomingLetters.edit')
-            ->middleware('permission:incoming_letters.update');
+            ->middleware('permission:incomingLetters.update');
 
         Route::put('incoming-letters/{incomingLetter}', [IncomingLetterController::class, 'update'])
             ->name('admin.manage.incomingLetters.update')
-            ->middleware('permission:incoming_letters.update');
+            ->middleware('permission:incomingLetters.update');
 
         Route::delete('incoming-letters/{incomingLetter}', [IncomingLetterController::class, 'destroy'])
             ->name('admin.manage.incomingLetters.destroy')
-            ->middleware('permission:incoming_letters.delete');
+            ->middleware('permission:incomingLetters.delete');
 
         Route::get('incoming-letters/{incomingLetter}/download', [IncomingLetterController::class, 'download'])
             ->name('admin.manage.incomingLetters.download')
-            ->middleware('permission:incoming_letters.download');
+            ->middleware('permission:incomingLetters.download');
 
         // Outgoing Letters Routes
         Route::get('outgoing-letters', [OutgoingLetterController::class, 'index'])
             ->name('admin.manage.outgoingLetters.index')
-            ->middleware('permission:outgoing_letters.read');
+            ->middleware('permission:outgoingLetters.read');
 
         Route::get('outgoing-letters/create', [OutgoingLetterController::class, 'create'])
             ->name('admin.manage.outgoingLetters.create')
-            ->middleware('permission:outgoing_letters.create');
+            ->middleware('permission:outgoingLetters.create');
 
         Route::post('outgoing-letters', [OutgoingLetterController::class, 'store'])
             ->name('admin.manage.outgoingLetters.store')
-            ->middleware('permission:outgoing_letters.create');
+            ->middleware('permission:outgoingLetters.create');
 
         Route::get('outgoing-letters/{outgoingLetter}', [OutgoingLetterController::class, 'show'])
             ->name('admin.manage.outgoingLetters.show')
-            ->middleware('permission:outgoing_letters.show');
+            ->middleware('permission:outgoingLetters.show');
 
         Route::get('outgoing-letters/{outgoingLetter}/edit', [OutgoingLetterController::class, 'edit'])
             ->name('admin.manage.outgoingLetters.edit')
-            ->middleware('permission:outgoing_letters.update');
+            ->middleware('permission:outgoingLetters.update');
 
         Route::put('outgoing-letters/{outgoingLetter}', [OutgoingLetterController::class, 'update'])
             ->name('admin.manage.outgoingLetters.update')
-            ->middleware('permission:outgoing_letters.update');
+            ->middleware('permission:outgoingLetters.update');
 
         Route::delete('outgoing-letters/{outgoingLetter}', [OutgoingLetterController::class, 'destroy'])
             ->name('admin.manage.outgoingLetters.destroy')
-            ->middleware('permission:outgoing_letters.delete');
+            ->middleware('permission:outgoingLetters.delete');
 
         Route::get('outgoing-letters/{outgoingLetter}/download', [OutgoingLetterController::class, 'download'])
             ->name('admin.manage.outgoingLetters.download')
-            ->middleware('permission:outgoing_letters.download');
+            ->middleware('permission:outgoingLetters.download');
     });
 
     // Settings Routes

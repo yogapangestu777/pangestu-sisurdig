@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Models\Attachment;
 use App\Models\OutgoingLetter;
 use App\Repositories\Contracts\OutgoingLetterRepositoryInterface;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
@@ -11,6 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class OutgoingLetterService
@@ -44,6 +47,7 @@ class OutgoingLetterService
     public function getAttachments(string $id): Collection
     {
         $outgoingLetter = $this->outgoingLetterRepo->findById(decryptId($id));
+
         $attachments = fetchAttachments($outgoingLetter, 'outgoing-letters');
 
         return $attachments;
@@ -71,6 +75,12 @@ class OutgoingLetterService
 
     public function createOutgoingLetter(array $data): bool
     {
+        if (! isset($data['file']) && ! $data['content']) {
+            notify()->error('Silakan masukan file atau konten.', 'Gagal');
+
+            return false;
+        }
+
         DB::beginTransaction();
         try {
             $outgoingLetter = $this->outgoingLetterRepo->create([
@@ -82,7 +92,30 @@ class OutgoingLetterService
                 'party_id' => $data['party'],
             ]);
 
-            updateAttachments($data['file'], $outgoingLetter->id, OutgoingLetter::class);
+            if (isset($data['file'])) {
+                updateAttachments($data['file'], $outgoingLetter->id, OutgoingLetter::class);
+            } else {
+                $pdfDirectory = storage_path('app/public/outgoing-letters/'.now()->format('Y-m-d'));
+                if (! file_exists($pdfDirectory)) {
+                    mkdir($pdfDirectory, 0777, true);
+                }
+
+                $randName = Str::uuid();
+                $pdfPath = 'outgoing-letters/'.now()->format('Y-m-d').'/'.$randName.'.pdf';
+                $pdf = PDF::loadHTML($data['content']);
+                $pdf->setOption('isHtml5ParserEnabled', true);
+                $pdf->setOption('isPhpEnabled', true);
+                $pdf->save(storage_path('app/public/'.$pdfPath));
+
+                Attachment::create([
+                    'attachmentable_id' => $outgoingLetter->id,
+                    'attachmentable_type' => get_class($outgoingLetter),
+                    'filename' => $randName,
+                    'extension' => 'pdf',
+                    'size' => filesize(storage_path('app/public/'.$pdfPath)),
+                    'title' => 'outgoing-letters',
+                ]);
+            }
 
             DB::commit();
 
@@ -91,7 +124,7 @@ class OutgoingLetterService
             return true;
         } catch (Exception $e) {
             DB::rollBack();
-            notify()->error('Surat masuk gagal ditambahkan.Silakan coba lagi dan jika masalah terus berlanjut,silakan hubungi pengembang.', 'Gagal');
+            notify()->error('Surat masuk gagal ditambahkan. Silakan coba lagi dan jika masalah terus berlanjut, silakan hubungi pengembang.', 'Gagal');
             Log::error("Error: {$e->getMessage()}");
 
             return false;
@@ -113,7 +146,31 @@ class OutgoingLetterService
                 'party_id' => $data['party'],
             ]);
 
-            updateAttachments($data['file'], $outgoingLetter->id, OutgoingLetter::class);
+            if (! isset($data['file'])) {
+                updateAttachments($data['file'], $outgoingLetter->id, OutgoingLetter::class);
+            } else {
+                $pdfDirectory = storage_path('app/public/outgoing-letters/'.now()->format('Y-m-d'));
+                if (! file_exists($pdfDirectory)) {
+                    mkdir($pdfDirectory, 0777, true);
+                }
+
+                $randName = Str::uuid();
+                $pdfPath = 'outgoing-letters/'.now()->format('Y-m-d').'/'.$randName.'.pdf';
+                $pdf = PDF::loadHTML($data['content']);
+                $pdf->setOption('isHtml5ParserEnabled', true);
+                $pdf->setOption('isPhpEnabled', true);
+                $pdf->save(storage_path('app/public/'.$pdfPath));
+
+                Attachment::where('id', $decrytedId)
+                    ->update([
+                        'attachmentable_id' => $outgoingLetter->id,
+                        'attachmentable_type' => get_class($outgoingLetter),
+                        'filename' => $randName,
+                        'extension' => 'pdf',
+                        'size' => filesize(storage_path('app/public/'.$pdfPath)),
+                        'title' => 'outgoing-letters',
+                    ]);
+            }
 
             DB::commit();
 

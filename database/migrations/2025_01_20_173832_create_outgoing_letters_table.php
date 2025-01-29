@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('party_id')->constrained()->cascadeOnDelete();
             $table->string('reference_number', 150)->unique();
             $table->string('subject', 200);
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

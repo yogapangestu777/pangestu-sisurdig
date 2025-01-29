@@ -11,6 +11,8 @@ class Attachment extends Model
     use SoftDeletes;
 
     protected $fillable = [
+        'attachmentable_id',
+        'attachmentable_type',
         'filename',
         'extension',
         'size',
