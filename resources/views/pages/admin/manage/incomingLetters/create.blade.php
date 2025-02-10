@@ -30,7 +30,7 @@
                 <div class="nk-block nk-block-lg">
                     <form action="{{ route('admin.manage.incomingLetters.store') }}" method="post" autocomplete="off">
                         @csrf
-                        <div class="row">
+                        <div class="row g-3">
                             <div class="col-lg-8">
                                 <div class="card card-bordered">
                                     <div class="card-inner">
@@ -80,9 +80,6 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <button class="btn btn-primary disable-button">Simpan</button>
                                             </div>
                                         </div>
                                     </div>
@@ -161,6 +158,9 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary disable-button">Simpan</button>
                             </div>
                         </div>
                     </form>
