@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                             <div class="dropdown-inner">
-                                @canany(['account.read', 'biography.read','password.read'])
+                                @canany(['account.read', 'biography.read', 'password.read'])
                                     <ul class="link-list">
                                         @can('account.read')
                                             <li>
@@ -55,7 +55,7 @@
                                             <li>
                                                 <a href="{{ route('admin.profile.password.index') }}">
                                                     <em class="icon ni ni-lock-alt"></em>
-                                                    <span>Password</span>
+                                                    <span>Kata Sandi</span>
                                                 </a>
                                             </li>
                                         @endcan
