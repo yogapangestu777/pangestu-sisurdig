@@ -13,6 +13,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -65,7 +66,7 @@ class OutgoingLetterService
         ];
 
         $prepareDownload = [
-            $firstAttachment->storageUrl,
+            Storage::get("outgoing-letters/{$firstAttachment->formatted_attachment}"),
             Response::HTTP_OK,
             $headers,
         ];
