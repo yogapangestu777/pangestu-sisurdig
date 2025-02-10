@@ -1,3 +1,7 @@
 .notify {
     z-index: 9999;
 }
+
+.tox-statusbar__branding {
+    display: none;
+}
